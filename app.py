@@ -13,7 +13,7 @@ log = logger.getLogger(__name__)
 log.info("Starting application...")
 
 app = Flask(__name__)
-api = Api(app)
+api = Api(app, catch_all_404s=True)
 
 from libs.sync_csv_redis import SyncCsvRedis
 preprocessor = SyncCsvRedis()
