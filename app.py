@@ -17,7 +17,6 @@ api = Api(app, catch_all_404s=True)
 
 from libs.sync_csv_redis import SyncCsvRedis
 preprocessor = SyncCsvRedis()
-preprocessor.sync_data()
 
 log.info("Collecting resource endpoints...")
 from resources.v1.csvdata import CsvDataResource
@@ -25,4 +24,5 @@ api.add_resource(CsvDataResource, '/v1/csvdata/<key>')
 
 log.info("Binding to interface: %s:%d" % (APP_HOST, APP_PORT))
 if __name__ == '__main__':
+    preprocessor.sync_data()
     app.run(debug=APP_DEBUG, host=APP_HOST, port=APP_PORT)
